@@ -4,6 +4,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Menu, X, Palette, Camera, Pen, Printer, Home, User, Briefcase, Mail } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
+import Link from 'next/link'
+// import profilePicture from '@/public/profile-picture.jpg'
+
+
 
 const Sidebar = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, sidebarRef }: {
   activeSection: string
@@ -35,7 +39,7 @@ const Sidebar = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, s
         <div className="flex flex-col gap-2">
           <div className="flex justify-center pt-6 pb-4">
             <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden">
-              <img src="/placeholder.svg?height=128&width=128" alt="Profile" className="w-full h-full object-cover" />
+              <Image src="/profile-picture.jpg" alt="Profile" width={128} height={128} className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
@@ -66,7 +70,6 @@ const Sidebar = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, s
     </>
   )
 }
-
 const HomeSection = ({ scrollToSection }: { scrollToSection: (sectionId: string) => void }) => (
   <section id="home" className="bg-gradient-to-br from-blue-600 to-purple-600 text-white min-h-screen flex items-center">
     <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
@@ -134,14 +137,13 @@ const WorkSection = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[1, 2, 3, 4, 5, 6].map((item) => (
           <div key={item} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
-            <img src={`/images/project-${item}.jpg`} alt={`Project ${item}`} className="w-full h-48 object-cover" />
+            <Image src={`/project-${item}.jpg`} alt={`Project ${item}`} width={400} height={192} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-2 text-purple-600">Project {item}</h3>
               <p className="text-gray-600">A vibrant design that captures the essence of creativity and innovation.</p>
             </div>
           </div>
-        ))}
-      </div>
+        ))}      </div>
     </div>
   </section>
 )
@@ -155,7 +157,7 @@ const ContactSection = () => (
           Get In Touch
         </p>
         <p className="mt-4 max-w-2xl text-xl text-purple-900 lg:mx-auto">
-          Interested in working together? Fill out the form below, and I'll get back to you as soon as possible.
+          Interested in working together? Fill out the form below, and I&apos;ll get back to you as soon as possible.
         </p>
       </div>
       <div className="mt-10">
@@ -224,7 +226,7 @@ const ContactSection = () => (
             </button>
             <button
               type="button"
-              onClick={() => window.open('https://wa.me/your_whatsapp_number', '_blank')}
+              onClick={() => window.open('https://wa.me/+2347047685389', '_blank')}
               className="mt-4 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
