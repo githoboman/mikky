@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import React, { useState, useEffect, useRef } from 'react'
@@ -103,7 +104,7 @@ const AboutSection = () => (
           Passionate About Design
         </p>
         <p className="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
-          With over 10 years of experience in graphic design, I've helped numerous clients bring their visions to life through compelling visuals.
+          With over 10 years of experience in graphic design, I have  helped numerous clients bring their visions to life through compelling visuals.
         </p>
       </div>
       <div className="mt-10">
