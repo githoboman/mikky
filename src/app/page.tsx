@@ -1,29 +1,41 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
+'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { Menu, X, Palette, Camera, Pen, Printer, Home, User, Briefcase, Mail } from 'lucide-react'
+import { Menu, Palette, Camera, Pen, Printer, Home, User, Briefcase, Mail, Phone } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
-import Link from 'next/link'
-// import profilePicture from '@/public/profile-picture.jpg'
+import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog"
 
+const Loader = () => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+    </div>
+  )
+}
 
+type NavItem = {
+  id: string
+  name: string
+  icon: React.ElementType
+}
 
-const Sidebar = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, sidebarRef }: {
+type SidebarProps = {
   activeSection: string
   setActiveSection: (sectionId: string) => void
   isMenuOpen: boolean
   setIsMenuOpen: (isOpen: boolean) => void
   sidebarRef: React.RefObject<HTMLDivElement>
-}) => {
-  const navItems = [
-    { id: 'home', name: 'Home', icon: Home },
-    { id: 'about', name: 'About', icon: User },
-    { id: 'work', name: 'Work', icon: Briefcase },
-    { id: 'contact', name: 'Contact', icon: Mail },
-  ]
+}
 
+const navItems: NavItem[] = [
+  { id: 'home', name: 'Home', icon: Home },
+  { id: 'about', name: 'About', icon: User },
+  { id: 'work', name: 'Work', icon: Briefcase },
+  { id: 'contact', name: 'Contact', icon: Mail },
+]
+
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, sidebarRef }) => {
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId)
     const element = document.getElementById(sectionId)
@@ -59,33 +71,29 @@ const Sidebar = ({ activeSection, setActiveSection, isMenuOpen, setIsMenuOpen, s
           ))}
         </nav>
       </div>
-      <div className="lg:hidden">
-        <button
-          className="p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <span className="sr-only">Open sidebar</span>
-          {isMenuOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
-        </button>
-      </div>
     </>
   )
 }
-const HomeSection = ({ scrollToSection }: { scrollToSection: (sectionId: string) => void }) => (
-  <section id="home" className="bg-gradient-to-br from-blue-600 to-purple-600 text-white min-h-screen flex items-center">
-    <div className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
+
+const HomeSection: React.FC<{ scrollToSection: (sectionId: string) => void }> = ({ scrollToSection }) => (
+  <section id="home" className="min-h-screen flex items-center relative overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-radial from-gray-900 via-gray-800 to-gray-900"></div>
+    <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-75"></div>
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/30 via-transparent to-transparent"></div>
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/30 via-transparent to-transparent"></div>
+    <div className="relative z-10 max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
       <h1 className="text-5xl font-extrabold sm:text-6xl md:text-7xl mb-6">
-        <span className="block text-yellow-300">Creative</span>
-        <span className="block">Graphic Design</span>
+        <span className="block text-cyan-400">Creative</span>
+        <span className="block text-white">Graphic Design</span>
       </h1>
-      <p className="mt-3 max-w-md mx-auto text-xl sm:text-2xl md:mt-5 md:max-w-3xl">
+      <p className="mt-3 max-w-md mx-auto text-xl sm:text-2xl md:mt-5 md:max-w-3xl text-gray-600">
         Bringing your ideas to life with vibrant colors and stunning visuals.
       </p>
       <div className="mt-10 max-w-md mx-auto sm:flex sm:justify-center md:mt-12">
         <div className="rounded-md shadow">
           <button
             onClick={() => scrollToSection('work')}
-            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-yellow-300 hover:bg-yellow-400 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
+            className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-cyan-400 hover:bg-cyan-300 md:py-4 md:text-lg md:px-10 transition-colors duration-200"
           >
             View My Work
           </button>
@@ -95,7 +103,7 @@ const HomeSection = ({ scrollToSection }: { scrollToSection: (sectionId: string)
   </section>
 )
 
-const AboutSection = () => (
+const AboutSection: React.FC = () => (
   <section id="about" className="py-20 bg-gradient-to-br from-green-400 to-blue-500 min-h-screen flex items-center">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="lg:text-center">
@@ -104,7 +112,7 @@ const AboutSection = () => (
           Passionate About Design
         </p>
         <p className="mt-4 max-w-2xl text-xl text-white lg:mx-auto">
-          With over 10 years of experience in graphic design, I have  helped numerous clients bring their visions to life through compelling visuals.
+          With over 10 years of experience in graphic design, I have helped numerous clients bring their visions to life through compelling visuals.
         </p>
       </div>
       <div className="mt-10">
@@ -131,26 +139,38 @@ const AboutSection = () => (
   </section>
 )
 
-const WorkSection = () => (
+const WorkSection: React.FC = () => (
   <section id="work" className="py-20 bg-gradient-to-br from-pink-500 to-orange-400 min-h-screen">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 className="text-3xl font-extrabold text-white mb-8 text-center">My Work</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[1, 2, 3, 4, 5, 6].map((item) => (
-          <div key={item} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105">
-            <Image src={`/project-${item}.jpg`} alt={`Project ${item}`} width={400} height={192} className="w-full h-48 object-cover" />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2 text-purple-600">Project {item}</h3>
-              <p className="text-gray-600">A vibrant design that captures the essence of creativity and innovation.</p>
-            </div>
-          </div>
-        ))}      </div>
+          <Dialog key={item}>
+            <DialogTrigger asChild>
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105 cursor-pointer">
+                <Image src={`/project-${item}.jpg`} alt={`Project ${item}`} width={400} height={192} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2 text-purple-600">Project {item}</h3>
+                  <p className="text-gray-600">A vibrant design that captures the essence of creativity and innovation.</p>
+                </div>
+              </div>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[725px]">
+              <div className="grid gap-4 py-4">
+                <Image src={`/project-${item}.jpg`} alt={`Project ${item}`} width={700} height={400} className="w-full object-cover rounded-lg" />
+                <h3 className="text-lg font-semibold text-purple-600">Project {item}</h3>
+                <p className="text-gray-600">A vibrant design that captures the essence of creativity and innovation. This project showcases the use of bold colors and dynamic compositions to create a visually striking result.</p>
+              </div>
+            </DialogContent>
+          </Dialog>
+        ))}
+      </div>
     </div>
   </section>
 )
 
-const ContactSection = () => (
-  <section id="contact" className="py-20 bg-gradient-to-br from-yellow-400 to-orange-500 min-h-screen flex items-center">
+const ContactSection: React.FC = () => (
+  <section id="contact" className="py-20 bg-gradient-to-br from-amber-300 to-orange-400 min-h-screen flex items-center">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="lg:text-center mb-12">
         <h2 className="text-base text-purple-800 font-semibold tracking-wide uppercase">Contact</h2>
@@ -231,7 +251,7 @@ const ContactSection = () => (
               className="mt-4 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893  6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0  01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884  9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893  6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
               </svg>
               WhatsApp Me
             </button>
@@ -245,11 +265,12 @@ const ContactSection = () => (
 export default function Component() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  const sidebarRef = useRef(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const sidebarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (sidebarRef.current && !(sidebarRef.current as Node).contains(event.target as Node)) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false)
       }
     }
@@ -258,6 +279,25 @@ export default function Component() {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId)
+    const element = document.getElementById(sectionId)
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -268,25 +308,21 @@ export default function Component() {
         setIsMenuOpen={setIsMenuOpen}
         sidebarRef={sidebarRef}
       />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="sticky top-0 flex h-[60px] items-center justify-end border-b bg-muted/40 px-6">
+      <div className="flex-1 flex flex-col">
+        <header className="sticky top-0 flex h-[60px] items-center justify-between border-b bg-muted/40 px-6">
+          <Button variant="ghost" size="icon" className="rounded-full lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="rounded-full" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-              <Mail className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="rounded-full" onClick={() => scrollToSection('contact')}>
+              <Phone className="h-5 w-5" />
               <span className="sr-only">Contact</span>
-            </Button>
-            <Button variant="ghost" size="icon" className="rounded-full">
-              <Image src="/placeholder.svg?height=32&width=32" width="32" height="32" className="rounded-full" alt="Avatar" />
-              <span className="sr-only">Toggle user menu</span>
             </Button>
           </div>
         </header>
         <main className="flex-1 overflow-x-hidden overflow-y-auto">
-          <HomeSection scrollToSection={(sectionId: string) => {
-            setActiveSection(sectionId)
-            const element = document.getElementById(sectionId)
-            element?.scrollIntoView({ behavior: 'smooth' })
-          }} />
+          <HomeSection scrollToSection={scrollToSection} />
           <AboutSection />
           <WorkSection />
           <ContactSection />
