@@ -61,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isMe
             <a
               key={item.id}
               className={`flex items-center mt-4 py-2 px-6 hover:bg-pink-500 hover:bg-opacity-25 transition-colors duration-200 ${
-                activeSection === item.id ? 'bg-pink-500 bg-opacity-25 border-r-4 border-yellow-300' : ''
+                activeSection === item.id ? 'bg-pink-900 bg-opacity-25 border-r-4 border-yellow-300' : ''
               }`}
               onClick={() => scrollToSection(item.id)}
             >
@@ -80,11 +80,11 @@ const HomeSection: React.FC<{ scrollToSection: (sectionId: string) => void }> = 
     <div className="absolute inset-0 bg-gradient-radial from-gray-900 via-gray-800 to-gray-900"></div>
     <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black opacity-75"></div>
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/30 via-transparent to-transparent"></div>
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/30 via-transparent to-transparent"></div>
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-yellow-700/30 via-transparent to-transparent"></div>
     <div className="relative z-10 max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8 text-center">
-      <h1 className="text-5xl font-extrabold sm:text-6xl md:text-7xl mb-6">
+      <h1 className="text-6xl font-extrabold sm:text-6xl md:text-7xl mb-6">
         <span className="block text-cyan-400">Creative</span>
-        <span className="block text-white">Graphic Design</span>
+        <span className="block text-gray-900">Graphic Design</span>
       </h1>
       <p className="mt-3 max-w-md mx-auto text-xl sm:text-2xl md:mt-5 md:max-w-3xl text-gray-600">
         Bringing your ideas to life with vibrant colors and stunning visuals.
