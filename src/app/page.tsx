@@ -45,9 +45,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isMe
 
   return (
     <>
-      <div ref={sidebarRef} className={`fixed inset-y-0 left-0 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-64 bg-gradient-to-b from-purple-600 to-pink-600 text-white transition duration-200 ease-in-out z-30 lg:translate-x-0 lg:static lg:inset-0`}>
+      <div ref={sidebarRef} className={`fixed inset-y-0 left-0 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-64 bg-gradient-to-b from-cyan-400 to-blue-700 text-gray-900 font-extrabold transition duration-200 ease-in-out z-30 lg:translate-x-0 lg:static lg:inset-0`}>
         <div className="flex items-center justify-center h-20 shadow-md">
-          <div className="text-2xl font-bold text-yellow-300">DesignerName</div>
+          <div className="text-2xl font-bold text-gray-800">MK Delegate</div>
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex justify-center pt-6 pb-4">
@@ -60,7 +60,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isMe
           {navItems.map((item) => (
             <a
               key={item.id}
-              className={`flex items-center mt-4 py-2 px-6 hover:bg-pink-500 hover:bg-opacity-25 transition-colors duration-200 ${
+              className={`flex items-center mt-4 py-2 px-6 hover:bg-gray-800 hover:bg-opacity-25 transition-colors duration-200 ${
                 activeSection === item.id ? 'bg-pink-900 bg-opacity-25 border-r-4 border-yellow-300' : ''
               }`}
               onClick={() => scrollToSection(item.id)}
