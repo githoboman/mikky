@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isMe
 
   return (
     <>
-      <div ref={sidebarRef} className={`fixed inset-y-0 left-0 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-64 bg-gradient-to-b from-cyan-400 to-blue-700 text-gray-900 font-extrabold transition duration-200 ease-in-out z-30 lg:translate-x-0 lg:static lg:inset-0`}>
+      <div ref={sidebarRef} className={`fixed inset-y-0 left-0 transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} w-64 bg-gradient-to-b from-cyan-300 to-blue-700 text-gray-900 font-extrabold transition duration-200 ease-in-out z-30 lg:translate-x-0 lg:static lg:inset-0`}>
         <div className="flex items-center justify-center h-20 shadow-md">
           <div className="text-2xl font-bold text-gray-800">MK Delegate</div>
         </div>
@@ -310,7 +310,7 @@ export default function Component() {
         sidebarRef={sidebarRef}
       />
       <div className="flex-1 flex flex-col">
-        <header className="sticky top-0 flex h-[60px] items-center justify-between border-b bg-muted/40 px-6">
+        <header className="sticky top-0 flex h-[60px] items-center justify-between border-b bg-cyan-400 px-6">
           <Button variant="ghost" size="icon" className="rounded-full lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle menu</span>
