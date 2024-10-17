@@ -151,8 +151,8 @@ const WorkSection: React.FC = () => (
               <div className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105 cursor-pointer">
                 <Image src={`/project-${item}.jpg`} alt={`Project ${item}`} width={400} height={192} className="w-full h-48 object-cover" />
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2 text-purple-600">Project {item}</h3>
-                  <p className="text-gray-600">A vibrant design that captures the essence of creativity and innovation.</p>
+                  <h3 className="text-lg font-semibold mb-2 text-cyan-400">Project {item}</h3>
+                  <p className="text-gray-800 font-semibold ">A vibrant design that captures the essence of creativity and innovation.</p>
                 </div>
               </div>
             </DialogTrigger>
