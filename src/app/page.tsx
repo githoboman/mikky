@@ -248,7 +248,7 @@ const ContactSection: React.FC = () => (
             </button>
             <button
               type="button"
-              onClick={() => window.open('https://wa.me/+2347047685389', '_blank')}
+              onClick={() => window.open('https://wa.me/+2348125513891', '_blank')}
               className="mt-4 w-full inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200"
             >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
